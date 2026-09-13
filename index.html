@@ -66,7 +66,7 @@
     {
       "@type": "FAQPage",
       "mainEntity": [
-        {"@type": "Question", "name": "How is it more flavor, less salt?", "acceptedAnswer": {"@type": "Answer", "text": "A quarter teaspoon of table salt carries about 575 mg of sodium. The same quarter teaspoon of Buck Naked's carries 55 mg, because 33 to 37 ingredients are doing the work salt usually does on its own. Use twice the seasoning in place of the salt in a recipe and you still land around 75 percent less sodium, with more flavor."}},
+        {"@type": "Question", "name": "Read the label. 55 mg of sodium a shake.", "acceptedAnswer": {"@type": "Answer", "text": "A quarter teaspoon of table salt carries about 575 mg of sodium. The same quarter teaspoon of Buck Naked's carries 55 mg, because 33 to 37 ingredients are doing the work salt usually does on its own. Use twice the seasoning in place of the salt in a recipe and you still land around 75 percent less sodium, with more flavor."}},
         {"@type": "Question", "name": "What's actually in the bottle?", "acceptedAnswer": {"@type": "Answer", "text": "Sugars, salts, onion and garlic powder, and a long list of whole spices (peppers, coriander, rosemary, marjoram, ginger, thyme, mint and more, depending on the blend) plus natural flavors. No MSG, no preservatives, no dyes or colors. Blends are freshly ground, mixed and sealed, and they do not lump, clump or cake after opening."}},
         {"@type": "Question", "name": "Do you ship?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, anywhere in the US by USPS flat rate. One bottle ships for about the same as several, so stock up or split an order with a friend. Use code cooknaked at checkout for a dollar off."}},
         {"@type": "Question", "name": "Where can I find it in the Keys?", "acceptedAnswer": {"@type": "Answer", "text": "Key Largo Fisheries, Key Lime Products, Sandal Factory Outlets and Robert Is Here in the Upper Keys, and the Marathon Seafood Festival every year. For bulk pricing or a custom blend call (305) 942-3571."}}
@@ -177,21 +177,14 @@ body.drawer-open{overflow:hidden}
 
 /* salt band: container break, dark */
 .salt{background:var(--brown);color:var(--cream);margin-top:-1px;padding:calc(var(--s) + 56px) 0 var(--s);position:relative;z-index:1}
-.salt .wrap{max-width:900px;text-align:center}
+.salt .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:center}
+.label-plate{margin:0;justify-self:center;max-width:300px;background:#fff;border:3px solid var(--ink);box-shadow:10px 10px 0 var(--yellow);transform:rotate(-2deg)}
+.label-plate img{width:100%;height:auto}
+.label-plate figcaption{background:var(--yellow);color:var(--ink);font-family:var(--font-h);font-size:1rem;padding:8px 14px;border-top:3px solid var(--ink)}
 .salt h2{color:#fff;margin-bottom:22px}
-.salt p{margin-inline:auto;color:var(--mute-d);font-size:1.15rem}
+.salt p{color:var(--mute-d);font-size:1.15rem}
 .salt p strong{color:var(--cream)}
-.grains{display:grid;gap:26px;margin:38px auto 30px;max-width:760px;text-align:left}
-.grain-row{display:grid;grid-template-columns:150px 1fr 90px;gap:16px;align-items:center}
-.grain-row .who{font-family:var(--font-h);font-size:1.2rem;color:#fff;line-height:1.1}
-.grain-row .who small{display:block;font-family:var(--font-b);font-weight:500;font-size:.85rem;color:var(--mute-d);margin-top:2px}
-.dots{display:flex;flex-wrap:wrap;gap:4px}
-.dots i{width:9px;height:9px;border-radius:50%;background:var(--cream);display:block;opacity:.9}
-.dots.ours i{background:var(--yellow)}
-.grain-row .mg{font-family:var(--font-h);font-size:1.7rem;color:var(--yellow);text-align:right;line-height:1}
-.grain-row .mg small{display:block;font-family:var(--font-b);font-size:.75rem;color:var(--mute-d);font-weight:600}
-.salt .src{font-size:.85rem;color:var(--mute-d);max-width:none}
-
+.salt .src{font-size:.85rem;color:var(--mute-d);margin-top:18px}
 /* lineup rail */
 .lineup{padding:var(--s) 0}
 .lineup-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:48px;align-items:end;margin-bottom:40px}
@@ -268,7 +261,8 @@ body.drawer-open{overflow:hidden}
 .gift-lead .price small,.gift .price small{font-family:var(--font-b);font-size:.8rem;font-weight:600;color:var(--mute-p);display:block;margin-top:4px}
 .gift-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
 .gift{background:#fff;border:3px solid var(--ink);box-shadow:var(--sticker);padding:22px 24px;display:flex;flex-direction:column}
-.gift img{max-height:190px;width:auto;height:auto;margin:0 auto 14px;filter:drop-shadow(4px 5px 0 rgba(20,16,8,.2))}
+.gift .gift-media{height:190px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:14px}
+.gift img{max-height:100%;max-width:100%;width:auto;height:auto;filter:drop-shadow(4px 5px 0 rgba(20,16,8,.2))}
 .gift h3{margin-bottom:6px}
 .gift p{color:var(--mute-p);font-size:1rem;flex:1}
 .gift .foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;gap:12px;flex-wrap:wrap}
@@ -350,6 +344,7 @@ body.drawer-open{overflow:hidden}
   .poster{max-width:380px}
   .order .wrap{grid-template-columns:1fr;gap:44px}
   .lineup-head{grid-template-columns:1fr;gap:16px}
+  .salt .wrap{grid-template-columns:1fr;gap:40px}
   .blend-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:900px){
@@ -392,10 +387,7 @@ body.drawer-open{overflow:hidden}
   .stage-card .btn{width:100%;justify-content:center}
   .salt{padding:calc(var(--s) + 36px) 0 var(--s)}
   .salt p{font-size:1.02rem}
-  .grains{margin:26px auto 20px;gap:16px}
-  .grain-row{grid-template-columns:1fr;gap:6px}
-  .grain-row .mg{text-align:left;font-size:1.4rem}
-  .dots i{width:7px;height:7px}
+  .label-plate{max-width:230px;box-shadow:6px 6px 0 var(--yellow)}
   .blend-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}
   .blend{padding:10px 10px 12px}
   .blend-media{height:150px}
@@ -420,7 +412,7 @@ body.drawer-open{overflow:hidden}
   .gift-lead h3{font-size:1.6rem}
   .gift-pair{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
   .gift{padding:14px}
-  .gift img{max-height:120px}
+  .gift .gift-media{height:120px}
   .gift h3{font-size:1.05rem}
   .gift p{font-size:.85rem}
   .gift .price{font-size:1.1rem}
@@ -463,7 +455,7 @@ body.drawer-open{overflow:hidden}
     </ul>
     <a class="nav-phone" href="tel:+13059423571"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i>(305) 942-3571</a>
     <a class="btn btn-red" href="#blends">Shop blends</a>
-    <a class="nav-call" href="tel:+13059423571" aria-label="Call (305) 942-3571"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i></a>
+    <a class="nav-call" href="tel:+13059423571" aria-label="Call (305) 942-3571"><i class="fa-solid fa-phone" aria-hidden="true"></i></a>
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
   </div>
 </header>
@@ -531,21 +523,16 @@ body.drawer-open{overflow:hidden}
 
 <section class="salt">
   <div class="wrap">
-    <h2>A tenth of the sodium of table salt,<br>shake for shake</h2>
-    <p>Salt is the shortcut most seasonings take. Buck built blends where <strong>33 to 37 ingredients do the work</strong> salt usually does alone, so a quarter teaspoon of Buck Naked's carries a tenth of the sodium of a quarter teaspoon of table salt. Swap it in at twice the amount and you still land around <strong>75 percent less sodium</strong>.</p>
-    <div class="grains" role="img" aria-label="Sodium in a quarter teaspoon: table salt about 575 milligrams, Buck Naked's 55 milligrams">
-      <div class="grain-row">
-        <div class="who">Table salt<small>1/4 teaspoon</small></div>
-        <div class="dots" id="dotsSalt" aria-hidden="true"></div>
-        <div class="mg">575<small>mg sodium</small></div>
-      </div>
-      <div class="grain-row">
-        <div class="who">Buck Naked's<small>1/4 teaspoon, any blend</small></div>
-        <div class="dots ours" id="dotsOurs" aria-hidden="true"></div>
-        <div class="mg">55<small>mg sodium</small></div>
-      </div>
+    <figure class="label-plate">
+      <img src="assets/lblHogRub4oz-nutrition.jpg" alt="The Nutrition Facts panel printed on the Hog Rub label: serving size 1/4 teaspoon, calories 0, sodium 55 mg" loading="lazy" width="496" height="984">
+      <figcaption>Straight off the Hog Rub label</figcaption>
+    </figure>
+    <div class="salt-copy">
+      <h2>Read the label.<br>55 mg of sodium a shake.</h2>
+      <p>A quarter teaspoon of table salt is about 575 mg of sodium. The same quarter teaspoon of any Buck Naked's blend is 55 mg, because <strong>33 to 37 ingredients are doing the work</strong> salt usually does alone.</p>
+      <p>Buck's rule of thumb: use twice the seasoning in place of the salt in a recipe and you still land around <strong>75 percent less sodium</strong>, with more going on in every bite. No MSG, no preservatives, no dyes.</p>
+      <p class="src">Table salt figure: USDA FoodData Central, 1.5 g of salt. Buck Naked's figure: the nutrition panel on every bottle.</p>
     </div>
-    <p class="src">Each dot is 5 mg. Table salt figure from USDA FoodData Central for 1.5 g of salt; Buck Naked's figure from the nutrition panel printed on every label. No MSG, no preservatives, no dyes.</p>
   </div>
 </section>
 
@@ -639,13 +626,13 @@ body.drawer-open{overflow:hidden}
     </div>
     <div class="gift-pair">
       <article class="gift">
-        <img src="assets/set-fish-naked.png" alt="Fish Naked gift set with four seasoning bottles and two labeled mixing bottles" loading="lazy" width="798" height="621">
+        <div class="gift-media"><img src="assets/set-fish-naked.png" alt="Fish Naked gift set with four seasoning bottles and two labeled mixing bottles" loading="lazy" width="798" height="621"></div>
         <h3>Fish Naked</h3>
         <p>Hog, Reef, Seafood and Fiery, plus two labeled mixing bottles for jerk and blackening.</p>
         <div class="foot"><div class="price">$36.95<small>4 oz set</small></div><a class="btn btn-white" href="https://chefbucknaked.com/products/combos-gift-sets/buck-nakeds-fish-naked-gift-set/">Get it</a></div>
       </article>
       <article class="gift">
-        <img src="assets/set-hunt-naked.png" alt="Hunt Naked gift set with four seasoning bottles and two labeled mixing bottles" loading="lazy" width="800" height="513">
+        <div class="gift-media"><img src="assets/set-hunt-naked.png" alt="Hunt Naked gift set with four seasoning bottles and two labeled mixing bottles" loading="lazy" width="800" height="513"></div>
         <h3>Hunt Naked</h3>
         <p>Hog, Reef, Buck and Fiery, plus the two mixing bottles. Trophy seasonings for any game.</p>
         <div class="foot"><div class="price">$36.95<small>4 oz set</small></div><a class="btn btn-white" href="https://chefbucknaked.com/products/combos-gift-sets/buck-nakeds-hunt-naked-gift-set/">Get it</a></div>
@@ -820,10 +807,6 @@ if ('scrollRestoration' in history) { history.scrollRestoration = 'auto'; }
   });
   /* preload the six other bottles so the swap is instant */
   Object.keys(PICKS).forEach(function(k){ var i = new Image(); i.src = PICKS[k].bottle; var j = new Image(); j.src = PICKS[k].photo; });
-
-  /* sodium dots: 5 mg each */
-  function dots(id, n){ var box = document.getElementById(id); var f = document.createDocumentFragment(); for (var i=0;i<n;i++){ f.appendChild(document.createElement('i')); } box.appendChild(f); }
-  dots('dotsSalt', 115); dots('dotsOurs', 11);
 
   /* reviews carousel */
   var rr = document.getElementById('revRail'), rp = document.getElementById('revPrev'), rn = document.getElementById('revNext');
