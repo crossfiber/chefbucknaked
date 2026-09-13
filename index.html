@@ -96,9 +96,6 @@ p{margin:0 0 1em;max-width:68ch}
 .skip-link{position:absolute;left:-9999px;top:0;z-index:9999;background:var(--ink);color:#fff;padding:12px 18px;font-weight:700;text-decoration:none}
 .skip-link:focus{left:0}
 :focus-visible{outline:3px solid var(--red);outline-offset:3px}
-.hl{background:linear-gradient(transparent 55%,var(--yellow) 55%,var(--yellow) 92%,transparent 92%);padding:0 .08em}
-.dark .hl,.on-yellow .hl{background:linear-gradient(transparent 55%,var(--red) 55%,var(--red) 92%,transparent 92%);color:inherit}
-.on-yellow .hl{color:#fff;background:linear-gradient(transparent 12%,var(--red) 12%,var(--red) 94%,transparent 94%)}
 
 /* buttons: sticker family (pressable only) */
 .btn{display:inline-flex;align-items:center;gap:.55em;font-family:var(--font-h);font-size:1.15rem;letter-spacing:.01em;padding:.7em 1.35em;border-radius:10px;border:3px solid var(--ink);box-shadow:var(--sticker);text-decoration:none;cursor:pointer;line-height:1;transition:transform .15s,box-shadow .15s,background .15s;min-height:44px;white-space:nowrap}
@@ -122,7 +119,8 @@ p{margin:0 0 1em;max-width:68ch}
 .nav-phone{font-weight:700;color:var(--red);text-decoration:none;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
 .nav-phone:hover{text-decoration:underline}
 .nav .btn{font-size:1rem;padding:.6em 1.1em}
-.hamburger{display:none;margin-left:auto;background:var(--yellow);border:3px solid var(--ink);border-radius:10px;box-shadow:var(--sticker);width:48px;height:44px;cursor:pointer;align-items:center;justify-content:center;font-size:1.3rem;color:var(--ink)}
+.nav-call{display:none;margin-left:auto;background:#fff;border:3px solid var(--ink);border-radius:10px;box-shadow:var(--sticker);width:48px;height:44px;align-items:center;justify-content:center;font-size:1.15rem;color:var(--red)}
+.hamburger{display:none;background:var(--yellow);border:3px solid var(--ink);border-radius:10px;box-shadow:var(--sticker);width:48px;height:44px;cursor:pointer;align-items:center;justify-content:center;font-size:1.3rem;color:var(--ink)}
 body.drawer-open .hamburger{display:none}
 .drawer-clip{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:200}
 .drawer-clip.open{pointer-events:auto}
@@ -144,7 +142,7 @@ body.drawer-open{overflow:hidden}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:start}
 .hero h1{font-size:clamp(2.6rem,5.6vw,4.9rem);line-height:.98;text-transform:uppercase;letter-spacing:.005em;margin:0 0 20px}
 .hero h1 .line{display:block}
-.hero h1 .hl{display:inline-block;padding:0 .12em}
+.hero h1 .red{color:var(--red)}
 .hero-sub{font-size:1.2rem;color:var(--mute-y);max-width:34rem;margin-bottom:26px}
 .hero-sub strong{color:var(--ink)}
 .pick-q{font-family:var(--font-h);font-size:1.5rem;margin-bottom:12px}
@@ -160,10 +158,11 @@ body.drawer-open{overflow:hidden}
 .stage-photo{border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:var(--ink);position:relative;height:420px;overflow:hidden;margin-right:96px}
 .stage-photo img{width:100%;height:100%;object-fit:cover;object-position:center;transition:opacity .35s}
 .stage-photo figcaption{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--cream);font-weight:600;font-size:.9rem;padding:6px 12px;border-top:3px solid var(--yellow)}
-.stage-bottle{position:absolute;right:-6px;bottom:-60px;height:410px;width:auto;filter:drop-shadow(6px 8px 0 rgba(20,16,8,.35));transition:opacity .3s,transform .3s}
+.stage-bottle{position:absolute;right:-150px;bottom:-34px;height:410px;width:auto;filter:drop-shadow(6px 8px 0 rgba(20,16,8,.35));transition:opacity .3s,transform .3s;z-index:2}
 .stage.swap .stage-bottle{opacity:0;transform:translateY(8px)}
 .stage.swap .stage-photo img{opacity:0}
 .stage-card{margin:28px 150px 0 0;background:#fff;border:3px solid var(--ink);box-shadow:var(--sticker);padding:18px 22px;display:grid;grid-template-columns:1fr auto;gap:8px 20px;align-items:center;position:relative}
+.stage-card .stage-bottle{grid-row:1 / span 4}
 .stage-card h2{font-size:1.8rem;line-height:1.05}
 .stage-card .tag{position:absolute;top:-22px;left:18px}
 .stage-card .line{grid-column:1 / -1;margin:0;font-style:italic;color:var(--mute-p);font-size:1.05rem}
@@ -198,25 +197,26 @@ body.drawer-open{overflow:hidden}
 .lineup-head h2{font-size:clamp(2.4rem,5vw,4rem)}
 .lineup-head h3{font-size:1.5rem;margin-bottom:10px}
 .lineup-head p{color:var(--mute-p)}
-.rail-wrap{position:relative}
-.rail{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:24px;scrollbar-width:none;-ms-overflow-style:none;padding:26px 24px 12px;margin:0 -24px}
-.rail::-webkit-scrollbar{display:none}
-.rail-card{flex:0 0 250px;scroll-snap-align:start;display:flex;flex-direction:column;position:relative;background:var(--paper);border-radius:0;padding:0 8px 8px}
-.rail-card .plate{height:270px;display:flex;align-items:flex-end;justify-content:center;background:var(--paper-2);position:relative}
-.rail-card .plate img{max-height:250px;width:auto;height:auto;margin-bottom:-6px;filter:drop-shadow(4px 5px 0 rgba(20,16,8,.22))}
-.rail-card .tag{position:absolute;top:-14px;right:-6px;font-size:.7rem;min-width:78px}
-.rail-card h3{margin:16px 0 4px;font-size:1.3rem}
-.rail-card .line{font-style:italic;color:var(--mute-p);font-size:.95rem;margin:0 0 10px;flex:1}
-.rail-card .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.rail-card .price{font-family:var(--font-h);font-size:1.25rem;line-height:1}
-.rail-card .price small{font-family:var(--font-b);font-size:.75rem;font-weight:600;color:var(--mute-p);display:block;margin-top:2px}
-.rail-card .go{font-weight:700;color:var(--red);text-decoration:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 4px}
-.rail-card .go:hover{text-decoration:underline}
-.rail-nav{display:flex;gap:12px;justify-content:flex-end;margin-top:14px}
-.rail-btn{width:48px;height:44px;background:#fff;border:3px solid var(--ink);border-radius:10px;box-shadow:var(--sticker);cursor:pointer;font-size:1rem;color:var(--ink)}
-.rail-btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
-.limited{margin-top:26px;font-weight:600;color:var(--mute-p);max-width:none}
-.limited a{color:var(--red)}
+.blend-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px 18px}
+.blend{background:#fff;border:3px solid var(--ink);box-shadow:var(--sticker);padding:14px 14px 16px;display:flex;flex-direction:column;min-width:0}
+.blend-media{position:relative;height:200px;display:flex;align-items:flex-end;justify-content:center}
+.blend-media img{max-height:190px;width:auto;height:auto;filter:drop-shadow(4px 5px 0 rgba(20,16,8,.2))}
+.blend-media .tag{position:absolute;top:-24px;right:-18px;font-size:.68rem;min-width:76px}
+.blend h3{margin:14px 0 4px;font-size:1.15rem;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.blend .line{font-style:italic;color:var(--mute-p);font-size:.9rem;line-height:1.45;margin:0 0 12px;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:calc(3 * 1.45em)}
+.row-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.row-foot .price{font-family:var(--font-h);font-size:1.2rem;line-height:1}
+.row-foot .price small{font-family:var(--font-b);font-size:.72rem;font-weight:600;color:var(--mute-p);display:block;margin-top:3px}
+.btn-sm{font-size:.95rem;padding:.55em .9em;min-height:40px}
+.ltd-row{margin-top:40px}
+.ltd-row h3{font-size:1.25rem;margin-bottom:14px}
+.ltd-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;max-width:760px}
+.ltd{display:flex;align-items:center;gap:14px;background:var(--paper-2);border:3px solid var(--ink);box-shadow:var(--sticker);padding:10px 14px;text-decoration:none;color:var(--ink);min-width:0}
+.ltd:hover{transform:translate(-1px,-2px);box-shadow:5px 5px 0 var(--ink)}
+.ltd img{height:96px;width:auto;flex:0 0 auto;filter:drop-shadow(3px 4px 0 rgba(20,16,8,.2))}
+.ltd-name{font-family:var(--font-h);font-size:1rem;line-height:1.1;display:block}
+.ltd-price{display:block;font-weight:700;margin-top:4px}
+.ltd-price small{font-weight:600;color:var(--mute-p)}
 
 /* buck */
 .buck{background:var(--yellow);padding:var(--s) 0}
@@ -242,11 +242,17 @@ body.drawer-open{overflow:hidden}
 .feature blockquote::before{content:open-quote;color:var(--red)}
 .feature blockquote::after{content:close-quote;color:var(--red)}
 .feature cite{display:block;font-style:normal;font-weight:600;color:var(--mute-p);margin-top:16px;font-family:var(--font-b);font-size:1rem}
-.ribbon{columns:3;column-gap:32px}
-.ribbon figure{break-inside:avoid;margin:0 0 26px;padding:0 0 0 18px;border-left:4px solid var(--yellow)}
-.ribbon blockquote{margin:0 0 6px;font-size:1.02rem}
-.ribbon cite{font-style:normal;font-weight:700;font-size:.92rem;color:var(--ink)}
-.ribbon cite span{font-weight:500;color:var(--mute-p)}
+.rev-rail{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;padding:6px 6px 12px;margin:0 -6px;align-items:stretch}
+.rev-rail::-webkit-scrollbar{display:none}
+.rev{flex:0 0 calc((100% - 44px) / 3);scroll-snap-align:start;margin:0;background:#fff;border:3px solid var(--ink);box-shadow:var(--sticker);padding:22px 24px;display:flex;flex-direction:column;min-height:230px}
+.rev blockquote{margin:0 0 14px;font-size:1.02rem;flex:1}
+.rev blockquote::before{content:open-quote;color:var(--red);font-family:var(--font-h)}
+.rev blockquote::after{content:close-quote;color:var(--red);font-family:var(--font-h)}
+.rev cite{font-style:normal;font-weight:700;font-size:.92rem;color:var(--ink);margin-top:auto}
+.rev cite span{font-weight:500;color:var(--mute-p)}
+.rail-nav{display:flex;gap:12px;justify-content:center;margin-top:18px}
+.rail-btn{width:48px;height:44px;background:#fff;border:3px solid var(--ink);border-radius:10px;box-shadow:var(--sticker);cursor:pointer;font-size:1rem;color:var(--ink)}
+.rail-btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
 
 /* gifts */
 .gifts{background:var(--paper-2);padding:var(--s) 0}
@@ -274,9 +280,7 @@ body.drawer-open{overflow:hidden}
 .order h3{color:var(--yellow);font-size:1.45rem;margin:26px 0 8px}
 .order p{color:var(--mute-d)}
 .order p strong,.order a{color:#fff}
-.order a.big{font-family:var(--font-h);font-size:1.7rem;text-decoration:none;display:inline-flex;align-items:center;gap:12px}
-.order a.big i{color:var(--yellow)}
-.order a.big:hover{text-decoration:underline}
+.order .order-call{font-size:1.4rem;color:var(--ink);margin:4px 0 6px}
 .order ul{padding-left:1.1em;margin:0 0 6px;color:var(--mute-d)}
 .order li{margin-bottom:4px}
 .order li strong{color:var(--cream)}
@@ -337,18 +341,20 @@ body.drawer-open{overflow:hidden}
   .nav-links{gap:18px}
   .hero .wrap{grid-template-columns:1fr;gap:36px}
   .stage-photo{height:360px;margin-right:80px}
-  .stage-bottle{height:350px}
+  .stage-bottle{height:350px;right:-130px}
   .stage-card{margin-right:130px}
-  .ribbon{columns:2}
+  .rev{flex:0 0 calc((100% - 22px) / 2)}
   .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
   .buck .wrap{grid-template-columns:1fr;gap:44px}
   .poster{max-width:380px}
   .order .wrap{grid-template-columns:1fr;gap:44px}
   .lineup-head{grid-template-columns:1fr;gap:16px}
+  .blend-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:900px){
   .nav-links,.nav-phone,.nav .btn{display:none}
-  .hamburger{display:inline-flex}
+  .nav-call,.hamburger{display:inline-flex}
+  .nav .wrap{gap:12px}
   html{scroll-padding-top:calc(var(--nav-h-sm) + 20px)}
   :root{--nav-h:64px}
   .nav{height:var(--nav-h-sm)}
@@ -364,16 +370,18 @@ body.drawer-open{overflow:hidden}
   .hero-copy{display:contents}
   .hero h1{font-size:2.35rem;order:1;margin-bottom:14px}
   .pick-q{order:2;font-size:1.2rem;margin-bottom:8px}
-  .picks{order:3;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -20px 18px;padding:4px 20px 8px;scroll-snap-type:x proximity;min-width:0;width:calc(100% + 40px);max-width:none}
-  .picks::-webkit-scrollbar{display:none}
-  .picks li{flex:0 0 auto;scroll-snap-align:start}
+  .picks{order:3;gap:8px;margin:0 0 18px}
+  .pick{font-size:.92rem;padding:9px 13px}
   .stage{order:4}
   .hero-ctas{order:5;margin-top:18px}
   .hero-sub{order:6;font-size:1rem;margin:16px 0 0}
   .hero-proof{order:7;margin-top:10px;font-size:.9rem}
-  .stage-photo{height:220px;margin-right:0}
-  .stage-bottle{height:220px;right:-4px;bottom:-30px}
-  .stage-card{margin:18px 0 0;padding:12px 14px;grid-template-columns:1fr auto}
+  .stage-photo{height:auto;aspect-ratio:4/3;margin-right:0;box-shadow:5px 5px 0 var(--ink)}
+  .stage-photo img{aspect-ratio:4/3;height:auto}
+  .stage-bottle{position:static;height:118px;width:auto;grid-row:1 / span 3;filter:drop-shadow(3px 4px 0 rgba(20,16,8,.25))}
+  .stage-card{margin:18px 0 0;padding:14px;grid-template-columns:auto 1fr auto;gap:6px 12px}
+  .stage-card .line,.stage-card .meta,.stage-card .btn{grid-column:2 / -1}
+  .stage-card .price{text-align:right}
   .stage-card h2{font-size:1.4rem}
   .stage-card .price{font-size:1.25rem}
   .stage-card .btn{width:100%;justify-content:center}
@@ -383,17 +391,22 @@ body.drawer-open{overflow:hidden}
   .grain-row{grid-template-columns:1fr;gap:6px}
   .grain-row .mg{text-align:left;font-size:1.4rem}
   .dots i{width:7px;height:7px}
-  .rail{gap:14px;padding:22px 20px 8px;margin:0 -20px}
-  .rail-card{flex:0 0 78%;scroll-snap-align:center}
-  .rail{scroll-padding-inline:20px}
-  .rail-card .plate{height:200px}
-  .rail-card .plate img{max-height:184px}
-  .rail-nav{justify-content:center}
+  .blend-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}
+  .blend{padding:10px 10px 12px}
+  .blend-media{height:150px}
+  .blend-media img{max-height:140px}
+  .blend-media .tag{top:-20px;right:-12px;font-size:.62rem;min-width:70px}
+  .blend h3{font-size:1rem}
+  .blend .line{font-size:.82rem;-webkit-line-clamp:3}
+  .row-foot{gap:8px}
+  .row-foot .btn-sm{font-size:.85rem;padding:.5em .7em;min-height:38px}
+  .blend .line{-webkit-line-clamp:2;min-height:calc(2 * 1.45em)}
+  .ltd-grid{grid-template-columns:1fr;gap:10px}
+  .ltd img{height:64px}
   .poster{max-width:220px;box-shadow:6px 6px 0 var(--ink)}
   .buck .wrap{gap:32px}
-  .ribbon{columns:auto;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -20px;padding:0 20px 8px;scroll-padding-inline:20px}
-  .ribbon::-webkit-scrollbar{display:none}
-  .ribbon figure{flex:0 0 80%;scroll-snap-align:center;margin:0}
+  .rev-rail{gap:14px;margin:0 -20px;padding:6px 20px 10px;scroll-padding-inline:20px}
+  .rev{flex:0 0 82%;scroll-snap-align:center;padding:16px 18px;min-height:0}
   .feature{margin-bottom:28px}
   .feature blockquote{font-size:1.35rem}
   .reviews .count{margin-bottom:24px}
@@ -445,6 +458,7 @@ body.drawer-open{overflow:hidden}
     </ul>
     <a class="nav-phone" href="tel:+13059423571"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i>(305) 942-3571</a>
     <a class="btn btn-red" href="#blends">Shop blends</a>
+    <a class="nav-call" href="tel:+13059423571" aria-label="Call (305) 942-3571"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i></a>
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
   </div>
 </header>
@@ -470,10 +484,10 @@ body.drawer-open{overflow:hidden}
 </div>
 
 <main id="main" tabindex="-1">
-<section class="hero on-yellow" id="top">
+<section class="hero" id="top">
   <div class="wrap">
     <div class="hero-copy">
-      <h1><span class="line">More flavor,</span><span class="line"><span class="hl">less salt.</span></span><span class="line" style="font-size:.52em;letter-spacing:.01em;margin-top:.35em">Key Largo's all-natural spice blends</span></h1>
+      <h1><span class="line">More flavor,</span><span class="line"><span class="red">less salt.</span></span><span class="line" style="font-size:.52em;letter-spacing:.01em;margin-top:.35em">Key Largo's all-natural spice blends</span></h1>
       <p class="hero-sub">Ten small-batch rubs with <strong>33 to 37 ingredients</strong> each, <strong>55 mg of sodium</strong> a shake, no MSG, no preservatives, nothing artificial. Made in the Florida Keys by an award-winning chef who also hosts a cooking show.</p>
       <p class="pick-q" id="pickQ">What's cooking tonight?</p>
       <ul class="picks" aria-labelledby="pickQ" id="picks">
@@ -494,12 +508,12 @@ body.drawer-open{overflow:hidden}
 
     <div class="stage" id="stage">
       <figure class="stage-photo" style="margin-bottom:0">
-        <img id="stageImg" src="assets/slideshowSeasonedPig-984x369-1.jpg" alt="Slow-cooked pork on the grill with two bottles of Buck Naked's seasoning beside it" width="984" height="369" fetchpriority="high">
-        <figcaption id="stageCap">Pork belly, Hog Rubbed, Key Largo</figcaption>
+        <img id="stageImg" src="assets/IMG_0653.jpg" alt="A rubbed pork shoulder on a kamado grill with a bottle of Buck Naked's beside it" width="1000" height="750" fetchpriority="high">
+        <figcaption id="stageCap">Pork shoulder on the Egg, Hog Rubbed</figcaption>
       </figure>
-      <img class="stage-bottle" id="stageBottle" src="assets/bottle-hog-rub.png" alt="Bottle of Buck Naked's Hog Rub" width="264" height="600" fetchpriority="high">
       <div class="stage-card" aria-live="polite">
         <span class="tag" id="stageTag">Best Seller!</span>
+        <img class="stage-bottle" id="stageBottle" src="assets/bottle-hog-rub.png" alt="Bottle of Buck Naked's Hog Rub" width="260" height="600" fetchpriority="high">
         <h2 id="stageName">Hog Rub</h2>
         <div class="price"><span id="stagePrice">$7.50</span><small id="stageSize">4 oz, or 10 oz for $12.75</small></div>
         <p class="line" id="stageLine">The mother of all-purpose seasonings. Use it anywhere, any time (your hog may get jealous).</p>
@@ -510,9 +524,9 @@ body.drawer-open{overflow:hidden}
   </div>
 </section>
 
-<section class="salt dark">
+<section class="salt">
   <div class="wrap">
-    <h2>How is it <span class="hl">more flavor, less salt?</span></h2>
+    <h2>A tenth of the sodium of table salt,<br>shake for shake</h2>
     <p>Salt is the shortcut most seasonings take. Buck built blends where <strong>33 to 37 ingredients do the work</strong> salt usually does alone, so a quarter teaspoon of Buck Naked's carries a tenth of the sodium of a quarter teaspoon of table salt. Swap it in at twice the amount and you still land around <strong>75 percent less sodium</strong>.</p>
     <div class="grains" role="img" aria-label="Sodium in a quarter teaspoon: table salt about 575 milligrams, Buck Naked's 55 milligrams">
       <div class="grain-row">
@@ -539,35 +553,36 @@ body.drawer-open{overflow:hidden}
         <p>Sugars, salts, onion and garlic powder, and a long list of whole spices (peppers, coriander, rosemary, marjoram, ginger, thyme, mint and more, depending on the blend) plus natural flavors. Freshly ground, mixed and sealed, and they do not clump after opening. Every blend is 4 oz for $7.50 or 10 oz for $12.75, and any of them comes by the case of twelve.</p>
       </div>
     </div>
-    <div class="rail-wrap">
-      <div class="rail" id="rail" aria-label="The ten blends, scroll sideways">
-        <article class="rail-card"><div class="plate"><img src="assets/bottle-hog-rub.png" alt="Buck Naked's Hog Rub bottle" loading="lazy" width="264" height="600"><span class="tag">Best Seller!</span></div><h3>Hog Rub</h3><p class="line">The mother of all-purpose seasonings. 33 ingredients.</p><div class="foot"><div class="price">$7.50<small>4 oz</small></div><a class="go" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-hog-rub/">Get it <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i></a></div></article>
-        <article class="rail-card"><div class="plate"><img src="assets/bottle-poultry-powder.png" alt="Buck Naked's Poultry Powder bottle" loading="lazy" width="279" height="600"><span class="tag yellow">Chef's Pick</span></div><h3>Poultry Powder</h3><p class="line">Charms chickens, pampers poultry, and it's the one for spuds and fries.</p><div class="foot"><div class="price">$7.50<small>4 oz</small></div><a class="go" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-poultry-powder/">Get it <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i></a></div></article>
-        <article class="rail-card"><div class="plate"><img src="assets/bottle-reef-rub.png" alt="Buck Naked's Reef Rub bottle" loading="lazy" width="274" height="600"><span class="tag">#1 On Fish &amp; Veg</span></div><h3>Reef Rub</h3><p class="line">A fintastic fish and seafood seasoning. 36 ingredients, dill, celery seed, lemon.</p><div class="foot"><div class="price">$7.50<small>4 oz</small></div><a class="go" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-reef-rub/">Get it <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i></a></div></article>
-        <article class="rail-card"><div class="plate"><img src="assets/bottle-buck-rub.png" alt="Buck Naked's Buck Rub bottle" loading="lazy" width="274" height="600"><span class="tag">#1 On Steak</span></div><h3>Buck Rub</h3><p class="line">From moose to goose and turkey to jerky, it'll tame your game. Juniper, coffee, beer.</p><div class="foot"><div class="price">$7.50<small>4 oz</small></div><a class="go" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-buck-rub/">Get it <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i></a></div></article>
-        <article class="rail-card"><div class="plate"><img src="assets/bottle-bbq-spice.png" alt="Buck Naked's BB-Q Spice bottle" loading="lazy" width="277" height="600"><span class="tag yellow">Mild &amp; Smooth</span></div><h3>BB-Q Spice</h3><p class="line">Thrill your grill, share a brew with your Q. It's got beer in it.</p><div class="foot"><div class="price">$7.50<small>4 oz</small></div><a class="go" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-bb-q-spice/">Get it <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i></a></div></article>
-        <article class="rail-card"><div class="plate"><img src="assets/bottle-fiery-rub.png" alt="Buck Naked's Fiery Rub bottle" loading="lazy" width="274" height="600"><span class="tag">Caribbean Heat</span></div><h3>Fiery Rub</h3><p class="line">Smack your lips and shake your hips, quite a treat with twice the heat.</p><div class="foot"><div class="price">$7.50<small>4 oz</small></div><a class="go" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-fiery-rub/">Get it <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i></a></div></article>
-        <article class="rail-card"><div class="plate"><img src="assets/bottle-seafood-seasoning.png" alt="Buck Naked's Seafood Seasoning and Crab Boil bottle" loading="lazy" width="278" height="600"></div><h3>Seafood &amp; Crab Boil</h3><p class="line">Enhances seafood and fishes. Shrimp, crab, lobster, chowders, stews and spuds.</p><div class="foot"><div class="price">$7.50<small>4 oz</small></div><a class="go" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-seafood-seasoning-crab-boil/">Get it <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i></a></div></article>
-        <article class="rail-card"><div class="plate"><img src="assets/bottle-peppery-lime-garlic.png" alt="Buck Naked's Peppery Lime Garlic bottle" loading="lazy" width="269" height="600"><span class="tag yellow">Pepper Lovers</span></div><h3>Peppery Lime Garlic</h3><p class="line">Peppery-garlicky goodness with a lil' lime. Use it like fresh cracked pepper.</p><div class="foot"><div class="price">$7.75<small>4 oz</small></div><a class="go" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-peppery-lime-garlic/">Get it <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i></a></div></article>
-        <article class="rail-card"><div class="plate"><img src="assets/bottle-smoke-n-hot.png" alt="Buck Naked's Smoke-N-Hot bottle" loading="lazy" width="270" height="598"></div><h3>Smoke-N-Hot</h3><p class="line">A dry hot sauce with a wisp o' smoke. Awesome on hot wings.</p><div class="foot"><div class="price">$7.50<small>4 oz</small></div><a class="go" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-smoke-n-hot/">Get it <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i></a></div></article>
-        <article class="rail-card"><div class="plate"><img src="assets/set-make-it-black.png" alt="Make It Black blackening set: Reef Rub, Fiery Rub and a labeled mixing bottle" loading="lazy" width="386" height="800"><span class="tag">Award Winner</span></div><h3>Make It Black set</h3><p class="line">Reef Rub plus Fiery Rub plus a labeled bottle: mix them 50/50 for blackening spice.</p><div class="foot"><div class="price">$15.95<small>two 4 oz</small></div><a class="go" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-make-black-blackening-set/">Get it <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i></a></div></article>
-      </div>
-      <div class="rail-nav">
-        <button class="rail-btn" id="railPrev" aria-label="Scroll blends left"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
-        <button class="rail-btn" id="railNext" aria-label="Scroll blends right"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+    <div class="blend-grid">
+        <article class="blend"><div class="blend-media"><img src="assets/bottle-hog-rub.png" alt="Buck Naked's Hog Rub bottle" loading="lazy" width="260" height="600"><span class="tag">Best Seller!</span></div><h3>Hog Rub</h3><p class="line">The mother of all-purpose seasonings. 33 ingredients.</p><div class="row-foot"><div class="price">$7.50<small>4 oz</small></div><a class="btn btn-white btn-sm" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-hog-rub/">Get it</a></div></article>
+        <article class="blend"><div class="blend-media"><img src="assets/bottle-poultry-powder.png" alt="Buck Naked's Poultry Powder bottle" loading="lazy" width="275" height="600"><span class="tag yellow">Chef's Pick</span></div><h3>Poultry Powder</h3><p class="line">Charms chickens, pampers poultry. The one for spuds and fries.</p><div class="row-foot"><div class="price">$7.50<small>4 oz</small></div><a class="btn btn-white btn-sm" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-poultry-powder/">Get it</a></div></article>
+        <article class="blend"><div class="blend-media"><img src="assets/bottle-reef-rub.png" alt="Buck Naked's Reef Rub bottle" loading="lazy" width="268" height="600"><span class="tag">#1 On Fish &amp; Veg</span></div><h3>Reef Rub</h3><p class="line">A fintastic fish and seafood seasoning. 36 ingredients.</p><div class="row-foot"><div class="price">$7.50<small>4 oz</small></div><a class="btn btn-white btn-sm" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-reef-rub/">Get it</a></div></article>
+        <article class="blend"><div class="blend-media"><img src="assets/bottle-buck-rub.png" alt="Buck Naked's Buck Rub bottle" loading="lazy" width="270" height="600"><span class="tag">#1 On Steak</span></div><h3>Buck Rub</h3><p class="line">From moose to goose and turkey to jerky. Juniper, coffee, beer.</p><div class="row-foot"><div class="price">$7.50<small>4 oz</small></div><a class="btn btn-white btn-sm" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-buck-rub/">Get it</a></div></article>
+        <article class="blend"><div class="blend-media"><img src="assets/bottle-bbq-spice.png" alt="Buck Naked's BB-Q Spice bottle" loading="lazy" width="273" height="599"><span class="tag yellow">Mild &amp; Smooth</span></div><h3>BB-Q Spice</h3><p class="line">Thrill your grill, share a brew with your Q. It's got beer in it.</p><div class="row-foot"><div class="price">$7.50<small>4 oz</small></div><a class="btn btn-white btn-sm" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-bb-q-spice/">Get it</a></div></article>
+        <article class="blend"><div class="blend-media"><img src="assets/bottle-fiery-rub.png" alt="Buck Naked's Fiery Rub bottle" loading="lazy" width="269" height="600"><span class="tag">Caribbean Heat</span></div><h3>Fiery Rub</h3><p class="line">Smack your lips and shake your hips. Twice the heat.</p><div class="row-foot"><div class="price">$7.50<small>4 oz</small></div><a class="btn btn-white btn-sm" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-fiery-rub/">Get it</a></div></article>
+        <article class="blend"><div class="blend-media"><img src="assets/bottle-seafood-seasoning.png" alt="Buck Naked's Seafood and Crab Boil bottle" loading="lazy" width="274" height="600"></div><h3>Seafood &amp; Crab Boil</h3><p class="line">Shrimp, crab, lobster, chowders, stews and spuds.</p><div class="row-foot"><div class="price">$7.50<small>4 oz</small></div><a class="btn btn-white btn-sm" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-seafood-seasoning-crab-boil/">Get it</a></div></article>
+        <article class="blend"><div class="blend-media"><img src="assets/bottle-peppery-lime-garlic.png" alt="Buck Naked's Peppery Lime Garlic bottle" loading="lazy" width="265" height="599"><span class="tag yellow">Pepper Lovers</span></div><h3>Peppery Lime Garlic</h3><p class="line">Peppery-garlicky goodness with a lil' lime. Use it like cracked pepper.</p><div class="row-foot"><div class="price">$7.75<small>4 oz</small></div><a class="btn btn-white btn-sm" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-peppery-lime-garlic/">Get it</a></div></article>
+        <article class="blend"><div class="blend-media"><img src="assets/bottle-smoke-n-hot.png" alt="Buck Naked's Smoke-N-Hot bottle" loading="lazy" width="266" height="596"></div><h3>Smoke-N-Hot</h3><p class="line">A dry hot sauce with a wisp o' smoke. Awesome on hot wings.</p><div class="row-foot"><div class="price">$7.50<small>4 oz</small></div><a class="btn btn-white btn-sm" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-smoke-n-hot/">Get it</a></div></article>
+        <article class="blend"><div class="blend-media"><img src="assets/set-make-it-black.png" alt="Buck Naked's Make It Black set bottle" loading="lazy" width="382" height="800"><span class="tag">Award Winner</span></div><h3>Make It Black set</h3><p class="line">Reef Rub plus Fiery Rub plus a labeled bottle. Mix 50/50 for blackening.</p><div class="row-foot"><div class="price">$15.95<small>two 4 oz</small></div><a class="btn btn-white btn-sm" href="https://chefbucknaked.com/products/spice-blends/buck-nakeds-make-black-blackening-set/">Get it</a></div></article>
+    </div>
+    <div class="ltd-row">
+      <h3>Limited editions, small test batches, while they last</h3>
+      <div class="ltd-grid">
+        <a class="ltd" href="https://chefbucknaked.com/products/limited-edition-blends/buck-nakeds-baja-style-beach-blend/"><img src="assets/bottle-baja-beach-blend.png" alt="Buck Naked's Baja Style Beach Blend bottle" loading="lazy" width="269" height="587"><span class="ltd-name">Baja Style Beach Blend</span><span class="ltd-price">$8.50 <small>3.5 oz</small></span></a>
+        <a class="ltd" href="https://chefbucknaked.com/products/limited-edition-blends/krazy-keys-keylime-seasoning/"><img src="assets/bottle-krazy-keys-keylime.png" alt="Buck Naked's Krazy Keys Keylime bottle" loading="lazy" width="284" height="589"><span class="ltd-name">Krazy Keys Keylime</span><span class="ltd-price">$8.50 <small>3.5 oz</small></span></a>
+        <a class="ltd" href="https://chefbucknaked.com/products/limited-edition-blends/buck-nakeds-holiday-blend/"><img src="assets/bottle-holiday-blend.png" alt="Buck Naked's Holiday Blend bottle" loading="lazy" width="303" height="598"><span class="ltd-name">Holiday Blend</span><span class="ltd-price">$8.50 <small>3.5 oz</small></span></a>
       </div>
     </div>
-    <p class="limited">Limited editions, small test batches, $8.50 while they last: <a href="https://chefbucknaked.com/products/limited-edition-blends/buck-nakeds-baja-style-beach-blend/">Baja Style Beach Blend</a>, <a href="https://chefbucknaked.com/products/limited-edition-blends/krazy-keys-keylime-seasoning/">Krazy Keys Keylime</a>, <a href="https://chefbucknaked.com/products/limited-edition-blends/buck-nakeds-holiday-blend/">Holiday Blend</a>.</p>
   </div>
 </section>
 
-<section class="buck on-yellow" id="buck">
+<section class="buck" id="buck">
   <div class="wrap">
     <div class="poster">
       <img src="assets/imgBuckNakedPosterBig.jpg" alt="Buck Naked's poster art by Donald Shank: the cartoon chef in his apron and hat, surrounded by a pig, a fish, a turkey and a pot on the fire" loading="lazy" width="593" height="700">
     </div>
     <div>
-      <h2>The <span class="hl">chef in the apron</span> is a real guy in Key Largo</h2>
+      <h2>The chef in the apron is a real guy in Key Largo</h2>
       <p><strong>Buck Donnelly</strong> is an award-winning chef and the host of the "Keys' Kitchen" TV show. Hog Rub took him nearly three years to balance, and it is the blend that started the business. Every blend since has been built the same way: a long list of real ingredients instead of a short list and a lot of salt.</p>
       <p>You will find him and the family at the Marathon Seafood Festival every year, or on the phone about a custom blend. The label art is by Donald Shank, and the sign-off on every bottle reads the same.</p>
       <img class="sig" src="assets/buck_naked_signature_02.png" alt="Buck Naked signature" loading="lazy" width="250" height="70">
@@ -579,22 +594,24 @@ body.drawer-open{overflow:hidden}
 
 <section class="reviews" id="reviews">
   <div class="wrap">
-    <h2>People find it at a festival, then <span class="hl">order from everywhere</span></h2>
+    <h2>People find it at a festival, then order from everywhere</h2>
     <p class="count"><i class="fa-solid fa-star" aria-hidden="true"></i> 22 reviews on the site, all five stars, plus a decade of gallery comments. Names and towns as they wrote them.</p>
     <figure class="feature">
       <blockquote>Our family's favorite. We use it on everything, not just pork. Get the 10 oz size, you'll thank me later. The small bottles make great Christmas gifts, all my nieces and nephews ask for it every year.</blockquote>
       <figcaption><cite>Betty Willson, on Hog Rub, April 2026</cite></figcaption>
     </figure>
-    <div class="ribbon">
-      <figure><blockquote>I'd give this 6 stars if I could. Absolutely the best seasoning we have ever had for game, especially venison. I buy it by the case every fall.</blockquote><figcaption><cite>"Big Mike" <span>from Georgia, on Buck Rub</span></cite></figcaption></figure>
-      <figure><blockquote>I had found this in 2012 at a farmers market in southern Florida. Been ordering it online ever since! And I'm from Ohio.</blockquote><figcaption><cite>Gary McCoy <span>Ohio, on BB-Q Spice</span></cite></figcaption></figure>
-      <figure><blockquote>This blend is labeled "Chef's Top Choice" for a reason. It is the backbone seasoning for all my kitchens, both commercial and private.</blockquote><figcaption><cite>Chef Sean B. &amp; Brigade <span>on Poultry Powder</span></cite></figcaption></figure>
-      <figure><blockquote>Got Fiery Rub from Peppers of Key West a few years back. It was outstanding. Great that I can buy direct now. You have a fan in Chicago!</blockquote><figcaption><cite>Brian Holt <span>Chicago</span></cite></figcaption></figure>
-      <figure><blockquote>Introduced to Buck Naked spices at the 2024 Seafood Festival in Marathon. Chef Buck let us sample some blends. Enjoy them all so much it's time to order some more.</blockquote><figcaption><cite>Dennis and Bethann Leonard <span>on Reef Rub</span></cite></figcaption></figure>
-      <figure><blockquote>My wife refuses to eat any veggies without this seasoning on them. I put this on everything.</blockquote><figcaption><cite>Kyle Williams <span>on Reef Rub</span></cite></figcaption></figure>
-      <figure><blockquote>We've shared several of these sets with family and friends over the years, even gave one as a housewarming gift to new neighbors last spring.</blockquote><figcaption><cite>Brenda &amp; Willy <span>from Texas, on the Super Six Pack</span></cite></figcaption></figure>
-      <figure><blockquote>Friends turned us on to this when we visited them down in Key West and they cooked up fresh local shrimp at their beach house that blew my socks off.</blockquote><figcaption><cite>Stanley Slewski <span>on Seafood Seasoning</span></cite></figcaption></figure>
-      <figure><blockquote>We've used the Baja on chicken, fish, pork and burgers. It was awesome!</blockquote><figcaption><cite>Brianne <span>New York, on Baja Beach Blend</span></cite></figcaption></figure>
+    <div><div class="rev-rail" id="revRail" aria-label="Customer reviews, scroll sideways">
+      <figure class="rev"><blockquote>I'd give this 6 stars if I could. Absolutely the best seasoning we have ever had for game, especially venison. I buy it by the case every fall.</blockquote><figcaption><cite>"Big Mike" <span>from Georgia, on Buck Rub</span></cite></figcaption></figure>
+      <figure class="rev"><blockquote>I had found this in 2012 at a farmers market in southern Florida. Been ordering it online ever since! And I'm from Ohio.</blockquote><figcaption><cite>Gary McCoy <span>Ohio, on BB-Q Spice</span></cite></figcaption></figure>
+      <figure class="rev"><blockquote>This blend is labeled "Chef's Top Choice" for a reason. It is the backbone seasoning for all my kitchens, both commercial and private.</blockquote><figcaption><cite>Chef Sean B. &amp; Brigade <span>on Poultry Powder</span></cite></figcaption></figure>
+      <figure class="rev"><blockquote>Got Fiery Rub from Peppers of Key West a few years back. It was outstanding. Great that I can buy direct now. You have a fan in Chicago!</blockquote><figcaption><cite>Brian Holt <span>Chicago</span></cite></figcaption></figure>
+      <figure class="rev"><blockquote>Introduced to Buck Naked spices at the 2024 Seafood Festival in Marathon. Chef Buck let us sample some blends. Enjoy them all so much it's time to order some more.</blockquote><figcaption><cite>Dennis and Bethann Leonard <span>on Reef Rub</span></cite></figcaption></figure>
+      <figure class="rev"><blockquote>My wife refuses to eat any veggies without this seasoning on them. I put this on everything.</blockquote><figcaption><cite>Kyle Williams <span>on Reef Rub</span></cite></figcaption></figure>
+      <figure class="rev"><blockquote>We've shared several of these sets with family and friends over the years, even gave one as a housewarming gift to new neighbors last spring.</blockquote><figcaption><cite>Brenda &amp; Willy <span>from Texas, on the Super Six Pack</span></cite></figcaption></figure>
+      <figure class="rev"><blockquote>Friends turned us on to this when we visited them down in Key West and they cooked up fresh local shrimp at their beach house that blew my socks off.</blockquote><figcaption><cite>Stanley Slewski <span>on Seafood Seasoning</span></cite></figcaption></figure>
+      <figure class="rev"><blockquote>We've used the Baja on chicken, fish, pork and burgers. It was awesome!</blockquote><figcaption><cite>Brianne <span>New York, on Baja Beach Blend</span></cite></figcaption></figure>
+    </div>
+      <div class="rail-nav"><button class="rail-btn" id="revPrev" aria-label="Previous reviews"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button><button class="rail-btn" id="revNext" aria-label="Next reviews"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button></div>
     </div>
   </div>
 </section>
@@ -602,7 +619,7 @@ body.drawer-open{overflow:hidden}
 <section class="gifts" id="gifts">
   <div class="wrap">
     <div class="gifts-head">
-      <h2>Sets that <span class="hl">get gifted</span></h2>
+      <h2>Sets that get gifted</h2>
       <p>Every set is the real bottles, boxed. The 10 oz versions are the ones customers keep telling Buck to buy.</p>
     </div>
     <div class="gift-lead">
@@ -632,16 +649,16 @@ body.drawer-open{overflow:hidden}
   </div>
 </section>
 
-<section class="order dark" id="order">
+<section class="order" id="order">
   <div class="wrap">
     <div class="facts">
-      <h2>Ready to <span class="hl">cook naked?</span></h2>
+      <h2>Ready to cook naked?</h2>
       <p>Order on the site, or call Buck. Bulk pricing and custom blends happen on the phone.</p>
-      <a class="big" href="tel:+13059423571"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i>(305) 942-3571</a>
+      <a class="btn btn-white order-call" href="tel:+13059423571">(305) 942-3571</a>
       <h3>Do you ship?</h3>
-      <p><i class="fa-solid fa-truck-fast" aria-hidden="true" style="color:var(--yellow);margin-right:8px"></i>Yes, anywhere in the US by USPS flat rate. One bottle ships for about the same as several, so stock up or split an order with a friend. Use code <strong>cooknaked</strong> at checkout for a dollar off.</p>
+      <p>Yes, anywhere in the US by USPS flat rate. One bottle ships for about the same as several, so stock up or split an order with a friend. Use code <strong>cooknaked</strong> at checkout for a dollar off.</p>
       <h3>Where can I find it in the Keys?</h3>
-      <p><i class="fa-solid fa-location-crosshairs" aria-hidden="true" style="color:var(--yellow);margin-right:8px"></i>Key Largo Fisheries, Key Lime Products, Sandal Factory Outlets and Robert Is Here in the Upper Keys, and the Marathon Seafood Festival every year.</p>
+      <p>Key Largo Fisheries, Key Lime Products, Sandal Factory Outlets and Robert Is Here in the Upper Keys, and the Marathon Seafood Festival every year.</p>
     </div>
     <form class="form" id="leadForm" novalidate>
       <h3>Ask Buck anything</h3>
@@ -657,14 +674,14 @@ body.drawer-open{overflow:hidden}
   </div>
 </section>
 
-<section class="grill on-yellow" id="grill">
+<section class="grill" id="grill">
   <div class="wrap">
-    <h2>From <span class="hl">Buck's grill</span></h2>
+    <h2>From Buck's grill</h2>
     <p class="lede">Phone photos from the gallery and the blog, not a studio. This is what the bottles are for.</p>
     <div class="tiles">
-      <figure class="tile"><img src="assets/IMG_0653.jpg" alt="A rubbed pork shoulder on a kamado grill with a bottle of Buck Naked's beside it" loading="lazy" width="1000" height="750"><figcaption>Rubbed and on the Egg</figcaption></figure>
-      <figure class="tile"><img src="assets/100_1595.jpg" alt="Large shrimp grilling over charcoal with smoke rising" loading="lazy" width="1000" height="750"><figcaption>Keys shrimp over the coals</figcaption></figure>
-      <figure class="tile"><img src="assets/IMG_0563.jpg" alt="Chicken pieces on a grill under heavy smoke" loading="lazy" width="1000" height="750"><figcaption>Chicken in the smoke</figcaption></figure>
+      <figure class="tile"><img src="assets/IMG_3637.jpg" alt="Seasoned pork chops on the grill with two bottles of Buck Naked's" loading="lazy" width="1000" height="561"><figcaption>Chops, two bottles in reach</figcaption></figure>
+      <figure class="tile"><img src="assets/DSCF2153.jpg" alt="A competition trophy on a shelf with bottles of Buck Naked's seasoning around it" loading="lazy" width="708" height="944"><figcaption>The trophy shelf</figcaption></figure>
+      <figure class="tile"><img src="assets/IMG_0380.jpg" alt="A plate of seasoned rice, chicken and onions" loading="lazy" width="708" height="944"><figcaption>Dinner plate, seasoned through</figcaption></figure>
       <figure class="tile"><img src="assets/IMG_8024.jpg" alt="Fresh yellowtail snapper on ice" loading="lazy" width="1000" height="667"><figcaption>Snapper on ice</figcaption></figure>
       <figure class="tile"><img src="assets/IMG_0114.jpg" alt="Cooked blue crabs on ice next to a bottle of beer" loading="lazy" width="708" height="944"><figcaption>Crab boil day</figcaption></figure>
       <figure class="tile"><img src="assets/DSCF0026.jpg" alt="The six pack of seasonings sitting on the rim of an open kamado grill" loading="lazy" width="708" height="944"><figcaption>The six pack, grill-side</figcaption></figure>
@@ -764,10 +781,10 @@ if ('scrollRestoration' in history) { history.scrollRestoration = 'auto'; }
 
   /* the picker: real bottles, real tags, real taglines, real prices */
   var PICKS = {
-    hog:    {name:"Hog Rub", tag:"Best Seller!", tagYellow:false, price:"$7.50", size:"4 oz, or 10 oz for $12.75", line:"The mother of all-purpose seasonings. Use it anywhere, any time (your hog may get jealous).", meta:"33 ingredients. The blend that started the business.", cta:"Get Hog Rub", url:"https://chefbucknaked.com/products/spice-blends/buck-nakeds-hog-rub/", bottle:"assets/bottle-hog-rub.png", balt:"Bottle of Buck Naked's Hog Rub", photo:"assets/slideshowSeasonedPig-984x369-1.jpg", palt:"Slow-cooked pork on the grill with two bottles of Buck Naked's seasoning beside it", cap:"Pork belly, Hog Rubbed, Key Largo"},
-    reef:   {name:"Reef Rub", tag:"#1 On Fish & Veg", tagYellow:false, price:"$7.50", size:"4 oz, or 10 oz for $12.75", line:"A fintastic fish and seafood seasoning. Dill, celery seed, lemon, 36 ingredients in all.", meta:"36 ingredients. Buck uses it as a shake-n-bake with a little flour.", cta:"Get Reef Rub", url:"https://chefbucknaked.com/products/spice-blends/buck-nakeds-reef-rub/", bottle:"assets/bottle-reef-rub.png", balt:"Bottle of Buck Naked's Reef Rub", photo:"assets/slideshowSeasonedFish-984x369-1.jpg", palt:"Seasoned fish fillets on the grill", cap:"Fresh catch, Reef Rubbed"},
+    hog:    {name:"Hog Rub", tag:"Best Seller!", tagYellow:false, price:"$7.50", size:"4 oz, or 10 oz for $12.75", line:"The mother of all-purpose seasonings. Use it anywhere, any time (your hog may get jealous).", meta:"33 ingredients. The blend that started the business.", cta:"Get Hog Rub", url:"https://chefbucknaked.com/products/spice-blends/buck-nakeds-hog-rub/", bottle:"assets/bottle-hog-rub.png", balt:"Bottle of Buck Naked's Hog Rub", photo:"assets/IMG_0653.jpg", palt:"A rubbed pork shoulder on a kamado grill with a bottle of Buck Naked's beside it", cap:"Pork shoulder on the Egg, Hog Rubbed"},
+    reef:   {name:"Reef Rub", tag:"#1 On Fish & Veg", tagYellow:false, price:"$7.50", size:"4 oz, or 10 oz for $12.75", line:"A fintastic fish and seafood seasoning. Dill, celery seed, lemon, 36 ingredients in all.", meta:"36 ingredients. Buck uses it as a shake-n-bake with a little flour.", cta:"Get Reef Rub", url:"https://chefbucknaked.com/products/spice-blends/buck-nakeds-reef-rub/", bottle:"assets/bottle-reef-rub.png", balt:"Bottle of Buck Naked's Reef Rub", photo:"assets/100_1595.jpg", palt:"Large shrimp grilling over charcoal with smoke rising", cap:"Keys shrimp over the coals"},
     poultry:{name:"Poultry Powder", tag:"Chef's Pick", tagYellow:true, price:"$7.50", size:"4 oz, or 10 oz for $12.75", line:"Charms chickens, pampers poultry and tantalizes too. Good with spuds and especially french fries.", meta:"36 ingredients. A working chef calls it the backbone of his kitchens.", cta:"Get Poultry Powder", url:"https://chefbucknaked.com/products/spice-blends/buck-nakeds-poultry-powder/", bottle:"assets/bottle-poultry-powder.png", balt:"Bottle of Buck Naked's Poultry Powder", photo:"assets/IMG_0563.jpg", palt:"Chicken pieces on a grill under heavy smoke", cap:"Chicken in the smoke"},
-    buck:   {name:"Buck Rub", tag:"#1 On Steak", tagYellow:false, price:"$7.50", size:"4 oz, or 10 oz for $12.75", line:"From moose to goose and turkey to jerky, it'll tame your game. Extraordinary on steak and burgers.", meta:"Juniper berries, coffee and beer in the mix. Bought by the case every fall in Georgia.", cta:"Get Buck Rub", url:"https://chefbucknaked.com/products/spice-blends/buck-nakeds-buck-rub/", bottle:"assets/bottle-buck-rub.png", balt:"Bottle of Buck Naked's Buck Rub", photo:"assets/slideshowSeasonedMeat-984x369-1.jpg", palt:"A large seasoned roast with fresh herbs on the grill", cap:"Rubbed roast, herbs on top"},
+    buck:   {name:"Buck Rub", tag:"#1 On Steak", tagYellow:false, price:"$7.50", size:"4 oz, or 10 oz for $12.75", line:"From moose to goose and turkey to jerky, it'll tame your game. Extraordinary on steak and burgers.", meta:"Juniper berries, coffee and beer in the mix. Bought by the case every fall in Georgia.", cta:"Get Buck Rub", url:"https://chefbucknaked.com/products/spice-blends/buck-nakeds-buck-rub/", bottle:"assets/bottle-buck-rub.png", balt:"Bottle of Buck Naked's Buck Rub", photo:"assets/lamb.jpg", palt:"A whole lamb roasting on a grill grate", cap:"Whole lamb on the pit"},
     bbq:    {name:"BB-Q Spice", tag:"Mild & Smooth", tagYellow:true, price:"$7.50", size:"4 oz, or 10 oz for $12.75", line:"Thrill your grill, share a brew with your Q. It's got beer in it, bottoms up.", meta:"The easy one for gas grills and families. Try it on popcorn.", cta:"Get BB-Q Spice", url:"https://chefbucknaked.com/products/spice-blends/buck-nakeds-bb-q-spice/", bottle:"assets/bottle-bbq-spice.png", balt:"Bottle of Buck Naked's BB-Q Spice", photo:"assets/photo_2.jpg", palt:"Burgers on a backyard grill with the Keys behind", cap:"Backyard burgers, Key Largo"},
     fiery:  {name:"Fiery Rub", tag:"Caribbean Heat", tagYellow:false, price:"$7.50", size:"4 oz, or 10 oz for $12.75", line:"Smack your lips and shake your hips, quite a treat with twice the heat.", meta:"33 ingredients. A nice kick, not overwhelming. The competition-rib crowd's pick.", cta:"Get Fiery Rub", url:"https://chefbucknaked.com/products/spice-blends/buck-nakeds-fiery-rub/", bottle:"assets/bottle-fiery-rub.png", balt:"Bottle of Buck Naked's Fiery Rub", photo:"assets/IMG_0301.jpg", palt:"A plate of fresh red chili peppers arranged in a circle", cap:"Where the heat comes from"},
     plg:    {name:"Peppery Lime Garlic", tag:"Pepper Lovers", tagYellow:true, price:"$7.75", size:"4 oz, or 10 oz for $12.95", line:"Peppery-garlicky goodness with a lil' lime. Extra low salt, extra high flavor.", meta:"Use it like fresh cracked pepper. Salads, slaw, wings, fries, chowders, pasta.", cta:"Get Peppery Lime Garlic", url:"https://chefbucknaked.com/products/spice-blends/buck-nakeds-peppery-lime-garlic/", bottle:"assets/bottle-peppery-lime-garlic.png", balt:"Bottle of Buck Naked's Peppery Lime Garlic", photo:"assets/photo_3a.jpg", palt:"Chef Buck with a bite of cucumber over a tray of fresh vegetables", cap:"Buck and the veggie tray"}
@@ -803,14 +820,12 @@ if ('scrollRestoration' in history) { history.scrollRestoration = 'auto'; }
   function dots(id, n){ var box = document.getElementById(id); var f = document.createDocumentFragment(); for (var i=0;i<n;i++){ f.appendChild(document.createElement('i')); } box.appendChild(f); }
   dots('dotsSalt', 115); dots('dotsOurs', 11);
 
-  /* rail */
-  var rail = document.getElementById('rail');
-  var prev = document.getElementById('railPrev');
-  var next = document.getElementById('railNext');
-  if (rail && prev && next) {
-    var step = function(){ var c = rail.querySelector('.rail-card'); var gap = parseFloat(getComputedStyle(rail).gap) || 22; return c ? c.getBoundingClientRect().width + gap : 272; };
-    prev.addEventListener('click', function(){ rail.scrollBy({left: -step(), behavior: reduce ? 'auto' : 'smooth'}); });
-    next.addEventListener('click', function(){ rail.scrollBy({left:  step(), behavior: reduce ? 'auto' : 'smooth'}); });
+  /* reviews carousel */
+  var rr = document.getElementById('revRail'), rp = document.getElementById('revPrev'), rn = document.getElementById('revNext');
+  if (rr && rp && rn) {
+    var rstep = function(){ var c = rr.querySelector('.rev'); var gap = parseFloat(getComputedStyle(rr).gap) || 22; return c ? c.getBoundingClientRect().width + gap : 320; };
+    rp.addEventListener('click', function(){ rr.scrollBy({left: -rstep(), behavior: reduce ? 'auto' : 'smooth'}); });
+    rn.addEventListener('click', function(){ rr.scrollBy({left:  rstep(), behavior: reduce ? 'auto' : 'smooth'}); });
   }
 
   /* form: demo only, nothing is posted. Wire to the live form endpoint at launch. */
