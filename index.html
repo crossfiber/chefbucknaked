@@ -150,12 +150,13 @@ body.drawer-open{overflow:hidden}
 .pick{font-family:var(--font-b);font-weight:700;font-size:1rem;background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:10px;padding:10px 16px;cursor:pointer;box-shadow:var(--sticker);min-height:44px;transition:transform .12s,box-shadow .12s,background .12s}
 .pick:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
 .pick[aria-pressed="true"]{background:var(--ink);color:var(--yellow);transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.lbl-s{display:none}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .hero-proof{margin:22px 0 0;font-weight:600;color:var(--mute-y)}
 .hero-proof i{color:var(--red);margin-right:4px}
 
 .stage{position:relative;z-index:2;display:grid;grid-template-columns:1fr;padding-bottom:0}
-.stage-photo{border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:var(--ink);position:relative;height:420px;overflow:hidden;margin-right:96px}
+.stage-photo{border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:var(--ink);position:relative;height:420px;overflow:hidden;margin:0 96px 0 0}
 .stage-photo img{width:100%;height:100%;object-fit:cover;object-position:center;transition:opacity .35s}
 .stage-photo figcaption{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--cream);font-weight:600;font-size:.9rem;padding:6px 12px;border-top:3px solid var(--yellow)}
 .stage-bottle{position:absolute;right:-150px;bottom:-34px;height:410px;width:auto;filter:drop-shadow(6px 8px 0 rgba(20,16,8,.35));transition:opacity .3s,transform .3s;z-index:2}
@@ -340,7 +341,7 @@ body.drawer-open{overflow:hidden}
 @media (max-width:1100px){
   .nav-links{gap:18px}
   .hero .wrap{grid-template-columns:1fr;gap:36px}
-  .stage-photo{height:360px;margin-right:80px}
+  .stage-photo{height:360px;margin:0 80px 0 0}
   .stage-bottle{height:350px;right:-130px}
   .stage-card{margin-right:130px}
   .rev{flex:0 0 calc((100% - 22px) / 2)}
@@ -370,13 +371,17 @@ body.drawer-open{overflow:hidden}
   .hero-copy{display:contents}
   .hero h1{font-size:2.35rem;order:1;margin-bottom:14px}
   .pick-q{order:2;font-size:1.2rem;margin-bottom:8px}
-  .picks{order:3;gap:8px;margin:0 0 18px}
-  .pick{font-size:.92rem;padding:9px 13px}
+  .picks{order:3;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:8px;margin:0 0 14px}
+  .picks li:nth-child(-n+4){grid-column:span 3}
+  .picks li:nth-child(n+5){grid-column:span 4}
+  .pick{width:100%;font-size:.85rem;padding:9px 4px;text-align:center;white-space:nowrap;min-width:0}
+  .lbl-l{display:none}.lbl-s{display:inline}
+  .pick-q{margin-bottom:8px}
   .stage{order:4}
   .hero-ctas{order:5;margin-top:18px}
   .hero-sub{order:6;font-size:1rem;margin:16px 0 0}
   .hero-proof{order:7;margin-top:10px;font-size:.9rem}
-  .stage-photo{height:auto;aspect-ratio:4/3;margin-right:0;box-shadow:5px 5px 0 var(--ink)}
+  .stage-photo{height:auto;aspect-ratio:4/3;margin:0;box-shadow:5px 5px 0 var(--ink)}
   .stage-photo img{aspect-ratio:4/3;height:auto}
   .stage-bottle{position:static;height:118px;width:auto;grid-row:1 / span 3;filter:drop-shadow(3px 4px 0 rgba(20,16,8,.25))}
   .stage-card{margin:18px 0 0;padding:14px;grid-template-columns:auto 1fr auto;gap:6px 12px}
@@ -492,12 +497,12 @@ body.drawer-open{overflow:hidden}
       <p class="pick-q" id="pickQ">What's cooking tonight?</p>
       <ul class="picks" aria-labelledby="pickQ" id="picks">
         <li><button class="pick" data-key="hog" aria-pressed="true">Pork</button></li>
-        <li><button class="pick" data-key="reef" aria-pressed="false">Fish &amp; seafood</button></li>
+        <li><button class="pick" data-key="reef" aria-pressed="false"><span class="lbl-l">Fish &amp; seafood</span><span class="lbl-s">Fish</span></button></li>
         <li><button class="pick" data-key="poultry" aria-pressed="false">Chicken</button></li>
+        <li><button class="pick" data-key="plg" aria-pressed="false">Veggies</button></li>
         <li><button class="pick" data-key="buck" aria-pressed="false">Steak &amp; game</button></li>
         <li><button class="pick" data-key="bbq" aria-pressed="false">The grill</button></li>
         <li><button class="pick" data-key="fiery" aria-pressed="false">Something hot</button></li>
-        <li><button class="pick" data-key="plg" aria-pressed="false">Veggies</button></li>
       </ul>
       <div class="hero-ctas">
         <a class="btn btn-white" href="#blends">See all ten blends</a>
@@ -507,7 +512,7 @@ body.drawer-open{overflow:hidden}
     </div>
 
     <div class="stage" id="stage">
-      <figure class="stage-photo" style="margin-bottom:0">
+      <figure class="stage-photo">
         <img id="stageImg" src="assets/IMG_0653.jpg" alt="A rubbed pork shoulder on a kamado grill with a bottle of Buck Naked's beside it" width="1000" height="750" fetchpriority="high">
         <figcaption id="stageCap">Pork shoulder on the Egg, Hog Rubbed</figcaption>
       </figure>
